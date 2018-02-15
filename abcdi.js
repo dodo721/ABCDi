@@ -3,6 +3,7 @@ const config = require("abcdi-conf.json");
 const cli_path = "./" + config.path;
 const company_wallet = config.company_wallet;
 const minerfee = config.miner_fee;
+const companyfee = config.company_fee;
 
 function createRawTransaction (from_addr, to_addr, amount, take_fees, fees_from_sender, callback) {
     //garlicoin-cli createrawtransaction '[{"txid" :"<txid>", "vout" : <vout>}]' '{"<to_addr>": <amount>, "<company_wallet>": <garlictxfee>, "<from_addr>": <change>}'
@@ -45,7 +46,7 @@ function createRawTransaction (from_addr, to_addr, amount, take_fees, fees_from_
         if (total < amount) {
             return callback("balance_low");
         }
-        var garlictxfee = take_fees ? amount * 0.01 : 0;
+        var garlictxfee = take_fees ? amount * companyfee : 0;
         var change = (total * 1000000 - amount * 1000000 - minerfee * 1000000 - garlictxfee * 1000000) / 1000000;
         if (!fees_from_sender) {
             change = (total * 1000000 - amount * 1000000 - garlictxfee * 1000000) / 1000000;
