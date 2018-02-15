@@ -1,6 +1,8 @@
 # ABCDi
 The Address Based Crypto Daemon Interaction module for NodeJS provides interaction with crypto daemon CLIs while treating crypto addresses as separate accounts, and provides functionalities for miner fees and company fees.
 
+Note: the config file is currently set as an example for Garlicoin, but it can be used with any crypto using Bitcoin commands.
+
 ## Address Based
 The key focus of this module is that it is entirely address-based. In traditional crypto, the daemon links addresses all to their original account and then when making transactions from the account takes currency from any addresses linked, meaning normally a separate wallet would have to be created for every user. ABCDi solved this problem by treating each address as a separate account, so that when a transaction is made it is withdrawn only from one address, not any linked to the same account. This makes generating online "wallets" easy, as only 1 wallet needs to be set up for the service then each user can simply get a generated address from that wallet, another feature inbuilt into the module.
 
