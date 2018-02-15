@@ -1,5 +1,5 @@
 # ABCDi
-The Address Based Crypto Daemon Interaction module for NodeJS provides interaction with crypto daemon CLIs while treating crypto addresses as separate accounts, and provides functionalities for miner fees and company fees.
+The Address Based Crypto Daemon Interaction module for NodeJS provides interaction with crypto daemon CLIs while treating crypto addresses as separate accounts, and provides functionalities for miner fees and company fees. It is currently only Linux compatible.
 
 Note: the config file is currently set as an example for Garlicoin, but it can be used with any crypto using Bitcoin commands.
 
@@ -16,6 +16,9 @@ This module can currently:
 
 ## Development
 Features will be added frequently as they are thought of / suggested.
+
+## Setup
+Upload your crypto executeables to a directory on your server, and set it up like a normal wallet. Make sure the daemon is running (usually called [crypto name]d)! Upload abcdi.js and abcdi-conf.json to any directory, so long as they are in the same directory. Then in abcdi-conf.json, change `path` to the filepath of the cli executeable (usually called [crypto name]-cli). Change `company_wallet` to the address you want profits to send to. See Documentation for more details and descriptions of the other options. Once set up, simply `require ("abcdi")` from whatever directory it lies in for use.
 
 # Documentation
 
