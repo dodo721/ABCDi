@@ -49,7 +49,7 @@ function createRawTransaction (from_addr, to_addr, amount, take_fees, fees_from_
         var garlictxfee = take_fees ? amount * companyfee : 0;
         var change = (total * 1000000 - amount * 1000000 - minerfee * 1000000 - garlictxfee * 1000000) / 1000000;
         if (!fees_from_sender) {
-            change = (total * 1000000 - amount * 1000000 - garlictxfee * 1000000) / 1000000;
+            change = (total * 1000000 - amount * 1000000) / 1000000;
         }
         console.log("Total: " + total + " Amount: " + amount + " Miner fee: " + minerfee + " Our fee: " + garlictxfee + " Change: " + change);
         var createTXCommand = cli_path + " createrawtransaction ";
@@ -58,7 +58,7 @@ function createRawTransaction (from_addr, to_addr, amount, take_fees, fees_from_
             inputTXsFormatted[i] = {txid:inputTXs[i].txid, vout:inputTXs[i].vout};
         }
         createTXCommand += "'" + JSON.stringify(inputTXsFormatted) + "' ";
-        var outputs = "{\"" + to_addr + "\":" + (fees_from_sender ? amount : (amount * 1000000 - minerfee * 1000000) / 1000000) + (take_fees ? ", \"" + company_wallet + "\":" + garlictxfee : "") + (change > 0 ? ", \"" + from_addr + "\":" + change : "") + "}";
+        var outputs = "{\"" + to_addr + "\":" + (fees_from_sender ? amount : (amount * 1000000 - minerfee * 1000000 - garlictxfee * 1000000) / 1000000) + (take_fees ? ", \"" + company_wallet + "\":" + garlictxfee : "") + (change > 0 ? ", \"" + from_addr + "\":" + change : "") + "}";
         createTXCommand += "'" + outputs + "'";
         exec (createTXCommand, function (err, stdout, stderr) {
             if (err) {
